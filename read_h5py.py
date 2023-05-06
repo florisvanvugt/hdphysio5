@@ -46,12 +46,15 @@ class BioData:
 
 
 
-    def get_channels(self):
-        return self.channels
+    def get_channels(self,of_type=None):
+        if of_type==None:
+            return self.channels
+        else:
+            return self.channels_by_type[of_type]
 
+        
     def get_ecg_channels(self):
         return self.channels_by_type['ecg']
-
 
 
     def get_participants(self):
