@@ -50,11 +50,11 @@ class BioData:
         if of_type==None:
             return self.channels
         else:
-            return self.channels_by_type[of_type]
+            return self.channels_by_type.get(of_type,[])
 
         
     def get_ecg_channels(self):
-        return self.channels_by_type['ecg']
+        return self.get_channels('ecg')
 
 
     def get_participants(self):
