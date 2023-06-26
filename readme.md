@@ -37,6 +37,17 @@ Required attributes for each dataset:
 
 
 
+## Event markers
+
+Event markers such as triggers can be added in the attributes of the root dataset.
+
+There should be an attribute `markers` which contains a list of all markers (as strings).
+
+Then for each marker, there should be an attribute, again the root dataset, which contains a list of time codes (in s) at which the event happened.
+
+
+
+
 ## Converting
 
 The purpose is to use a clean and straight-forward HDF5-compliant format
