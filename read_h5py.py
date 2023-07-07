@@ -45,13 +45,24 @@ class BioData:
                 self.channels.append(nm)
                 self.channels_by_type[mod] = self.channels_by_type.get(mod,[])+[nm]
 
-        bio['t']=np.arange(dset.shape[0])/self.SR
+        self.markers = {}
+        for m in self.hf.attrs.get('markers',[]):
+            self.markers[m] = self.hf.attrs[m] # get the markers in question
+            
+        bio['t']=np.arange(dset.shape[0])/self.SR # recreate a time vector
 
         self.bio = bio
         self.preprocessed = {}
 
 
 
+    def get_markers(self):
+        return self.markers
+
+    def get_marker(self,m):
+        return self.markers.get(m,[])
+    
+        
     def get_channels(self,of_type=None):
         if of_type==None:
             return self.channels
@@ -69,12 +80,18 @@ class BioData:
         return part
 
 
+<<<<<<< HEAD
     def get(self,channel):
         if channel in self.channels:
             return np.array(self.bio[channel])
         else:
             print("## ERROR, channel {} not found.".format(channel))
             return None
+    
+    def get(self,c):
+        # Get a particular channel data
+        return np.array(self.bio[c])
+
     
     def summary(self):
         ret = "Summary of {}\n".format(self.fname)
@@ -95,6 +112,13 @@ class BioData:
                     nsamp,
                     frq,
                     dur
+                )
+        if len(self.markers):
+            ret += "\nMarkers:\n"
+            for m in self.markers:
+                ret += "∟ marker {} : {} events\n".format(
+                    m,
+                    len(self.markers[m]),
                 )
         return (ret)
 
