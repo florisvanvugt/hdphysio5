@@ -4,11 +4,17 @@
 
 import h5py
 import numpy as np
+import os
+
 
 class BioData:
 
     def __init__(self,fname):
 
+        if not os.path.exists(fname):
+            print("## ERROR, file {} does not seem to exist.".format(fname))
+            assert False
+        
         # This file is included in bioread
         self.hf = h5py.File(fname,'r')
         self.fname = fname
@@ -63,7 +69,13 @@ class BioData:
         return part
 
 
-
+    def get(self,channel):
+        if channel in self.channels:
+            return np.array(self.bio[channel])
+        else:
+            print("## ERROR, channel {} not found.".format(channel))
+            return None
+    
     def summary(self):
         ret = "Summary of {}\n".format(self.fname)
         if self.date:
@@ -86,7 +98,8 @@ class BioData:
                 )
         return (ret)
 
-
+    def print(self):
+        print(self.summary())
 
 
 
