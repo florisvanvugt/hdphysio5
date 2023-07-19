@@ -2,17 +2,20 @@
 
 # HDPhysio5 - Python Implementation of HDF5 format for physiological data
 
+
+
 ## Requirements
 
-`pip install h5py`
+`python -m pip install 'biobabel @ git+https://github.com/florisvanvugt/biobabel'`
+
 
 ## Usage
 
 ```{python}
 
-import read_h5py
-d = read_h5py.read('example.hdf5')
-print(d.summary())
+import biobabel as bb
+d = bb.read('example.hdf5')
+d.print()
 
 ```
 
@@ -29,7 +32,7 @@ Store datasets as follows:
 `/<participant>/<dataset>`
 
 Required attributes for each dataset:
-* `SR` sampling rate in Hz.
+* `SR` sampling rate in Hz (samples per second).
 * `modality` the measurement modality (e.g. `ecg`, `ppg`, etc.) in lower case.
 * `units` is the measurement units (e.g. `mV`, `microsiemens` or whatever), in lower case.
 * `participant` the participant (redundant but hey)
@@ -45,6 +48,11 @@ There should be an attribute `markers` which contains a list of all markers (as 
 
 Then for each marker, there should be an attribute, again the root dataset, which contains a list of time codes (in s) at which the event happened.
 
+
+
+## Meta data
+
+An additional empty dataset can be included in the root, `/meta`, which holds additional attributes.
 
 
 

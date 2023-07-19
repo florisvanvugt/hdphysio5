@@ -3,7 +3,14 @@ import pyxdf # pip3 install pyxdf
 
 
 
-
+## DEPRECATED:
+##
+##
+##  Superseded by biobabel.load()
+##
+##
+##
+##
 
 ## Ok, this takes an XDF file from LSL LabRecorder and converts it into
 ## an HDF5 dataset that the physio explorer can read.
