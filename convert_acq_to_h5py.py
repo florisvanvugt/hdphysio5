@@ -54,8 +54,10 @@ for ch in data.channels:
     print(" {}".format(ch.name))
 print()
 
-dt = data.earliest_marker_created_at.strftime("%m/%d/%Y %H:%M:%S %Z%z")
-
+if data.earliest_marker_created_at:
+    dt = data.earliest_marker_created_at.strftime("%m/%d/%Y %H:%M:%S %Z%z")
+else:
+    dt = 'None'
 
 
 import misc
